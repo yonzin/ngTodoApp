@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form name="addTodoForm" ng-submit="todoCtrl.addTodo(newTodo)" novalidate>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="newTodo.msg" placeholder="add a new todo">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="todoCtrl.addTodo(newTodo)">add</button>
+                  </span>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <ul class="list-group">
+            <li ng-repeat="todo in todoCtrl.todos" class="list-group-item"
+                ng-class="{'list-group-item-success': todo.completed}">
+                <p>
+                    <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+                    {{todo.id}} - {{todo.msg}}
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>

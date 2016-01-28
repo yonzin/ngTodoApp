@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form name="addTodoForm" ng-submit="addTodoCtrl.addTodo(addTodoCtrl.newTodo)" novalidate>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="addTodoCtrl.newTodo.msg" placeholder="add a new todo">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="addTodoCtrl.addTodo(addTodoCtrl.newTodo)">add</button>
+                  </span>
+            </div>
+        </form>
+    </div>
+</div>
