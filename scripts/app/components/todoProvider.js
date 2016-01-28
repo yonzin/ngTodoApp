@@ -6,7 +6,7 @@ app.provider('todoProvider', [ function () {
             todos: [],
             find: function (id) {
                 var todo = {};
-                angular.forEach(this.todos, function (value, key) {
+                angular.forEach(provider.todos, function (value, key) {
                     if (id = value.id) {
                         todo = value;
                     }
@@ -20,7 +20,7 @@ app.provider('todoProvider', [ function () {
 
             add: function (newTodo) {
                 var max = null;
-                angular.forEach(this.todos, function (value, key) {
+                angular.forEach(provider.todos, function (value, key) {
 
                     if (max === null || max.id < value.id) {
                         max = value;
@@ -33,7 +33,7 @@ app.provider('todoProvider', [ function () {
             },
 
             remove: function (toDelete) {
-                var index = this.todos.indexOf(toDelete);
+                var index = provider.todos.indexOf(toDelete);
                 if (index > -1) {
                     provider.todos.splice(index, 1);
                     //$rootScope.$broadcast( 'todos.update' );
@@ -41,7 +41,7 @@ app.provider('todoProvider', [ function () {
             },
 
             update: function (todo) {
-                angular.forEach(this.todos, function (value, key) {
+                angular.forEach(provider.todos, function (value, key) {
                     if (todo.id == value.id) {
                         console.log("update", value, key);
                         provider.todos[key] = todo;
