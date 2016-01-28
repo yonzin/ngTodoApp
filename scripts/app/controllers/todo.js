@@ -4,6 +4,7 @@ app.controller('MainController', ['$scope', 'todoProvider', function ($scope, to
     var controller = this;
     $scope.todos = [];
     $scope.editedTodo = null;
+    $scope.activeOption = 'all';
 
     //$scope.$on( 'todos.update', function( event ) {
     //    $scope.todos = controller.todoProvider.todos;
@@ -31,6 +32,23 @@ app.controller('MainController', ['$scope', 'todoProvider', function ($scope, to
     $scope.saveEdits = function(todo) {
         $scope.todoProvider.update(todo);
         $scope.editedTodo = null;
+    };
+
+    $scope.setFilter = function(option) {
+        console.log(option);
+        switch(option){
+            case 'todo':
+                $scope.filterOptions = {completed: false};
+                break;
+            case 'done':
+                $scope.filterOptions = {completed: true};
+                break;
+            default:
+            case 'all':
+                $scope.filterOptions = {};
+                break;
+        }
+        $scope.activeOption = option;
     };
 
 }]);
