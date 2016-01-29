@@ -1,27 +1,30 @@
 'use strict';
 
-app.controller('MainController', ['$scope', 'todoProvider', function ($scope, todoProvider) {
+app.controller('MainController', ['$rootScope', '$scope', 'todoProvider', 'todoService', function ($rootScope, $scope, todoProvider, todoService) {
     var controller = this;
     $scope.todos = [];
     $scope.editedTodo = null;
     $scope.activeOption = 'all';
 
-    //$scope.$on( 'todos.update', function( event ) {
-    //    $scope.todos = controller.todoProvider.todos;
-    //});
+    todoService.awesomeFct();
+
+    $scope.$on( 'todos.update', function( event ) {
+        $scope.todos = todoProvider.todos;
+        console.log("event todos.update");
+    });
 
     todoProvider.then(function (provider) {
-        $scope.todoProvider = provider;
-        $scope.todos = $scope.todoProvider.todos;
+        todoProvider = provider;
+        $scope.todos = todoProvider.todos;
     });
 
     $scope.toggleCompleted = function(todo) {
-        $scope.todoProvider.update(todo);
+        todoProvider.update(todo);
     };
 
     $scope.removeTodo = function(todo) {
         console.log("remove", todo);
-        $scope.todoProvider.remove(todo);
+        todoProvider.remove(todo);
     };
 
     $scope.editTodo = function(todo) {
@@ -30,7 +33,7 @@ app.controller('MainController', ['$scope', 'todoProvider', function ($scope, to
     };
 
     $scope.saveEdits = function(todo) {
-        $scope.todoProvider.update(todo);
+        todoProvider.update(todo);
         $scope.editedTodo = null;
     };
 
