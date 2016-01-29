@@ -1,8 +1,19 @@
 'use strict';
 
-app.provider('todoProvider', [ function () {
+app.service('todoService',  ['$rootScope', function ($rootScope) {
+    var service = {
+        awesomeFct: function() {
+            //console.log($rootScope);
+        }
+    };
+
+    return service;
+}]);
+
+app.provider('todoProvider', [function () {
         var provider =
         {
+            rootScope: null,
             todos: [],
             find: function (id) {
                 var todo = {};
@@ -29,14 +40,15 @@ app.provider('todoProvider', [ function () {
                 newTodo.id = newTodo.id || max.id + 1;
                 newTodo.completed = false;
                 provider.todos.push(newTodo);
-                //$rootScope.$broadcast( 'todos.update' );
+                //console.log(provider.rootScope);
+                provider.rootScope.$broadcast( 'todos.update' );
             },
 
             remove: function (toDelete) {
                 var index = provider.todos.indexOf(toDelete);
                 if (index > -1) {
                     provider.todos.splice(index, 1);
-                    //$rootScope.$broadcast( 'todos.update' );
+                    provider.rootScope.$broadcast( 'todos.update' );
                 }
             },
 
@@ -45,20 +57,22 @@ app.provider('todoProvider', [ function () {
                     if (todo.id == value.id) {
                         console.log("update", value, key);
                         provider.todos[key] = todo;
-                       // $rootScope.$broadcast( 'todos.update' );
+                        provider.rootScope.$broadcast( 'todos.update' );
                         return;
                     }
                 });
             },
         };
-        this.$get = function ($http, $q) {
+        this.$get = ['$injector', '$http', '$q', function ($injector, $http, $q) {
+            provider.rootScope = $injector.get('$rootScope');
+
             var deferred = $q.defer();
             $http.get('data/todos.json').success(function(data) {
                 provider.todos = data;
                 deferred.resolve(provider);
             });
             return deferred.promise;
-        };
+        }];
     }]
 );
 
