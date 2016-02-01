@@ -3,31 +3,31 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <ul class="nav nav-pills">
-                  <li ng-class="{ active: activeOption == 'all' }"><a ng-click="setFilter('all')" href="#/all">all</a></li>
-                  <li ng-class="{ active: activeOption == 'done' }"><a ng-click="setFilter('done')" href="#/done">done</a></li>
-                  <li ng-class="{ active: activeOption == 'todo' }"><a ng-click="setFilter('todo')" href="#/todo">todo</a></li>
+                  <li ng-class="{ active: todoCtrl.activeOption == 'all' }"><a ng-click="todoCtrl.setFilter('all')" href="#/all">all</a></li>
+                  <li ng-class="{ active: todoCtrl.activeOption == 'done' }"><a ng-click="todoCtrl.setFilter('done')" href="#/done">done</a></li>
+                  <li ng-class="{ active: todoCtrl.activeOption == 'todo' }"><a ng-click="todoCtrl.setFilter('todo')" href="#/todo">todo</a></li>
                 </ul>
             </div>
             <ul class="list-group">
-                <li ng-repeat="todo in todos | filter: filterOptions | orderBy: 'id'" class="list-group-item"
+                <li ng-repeat="todo in todoCtrl.todos | filter: todoCtrl.filterOptions | orderBy: 'id'" class="list-group-item"
                     ng-class="{'list-group-item-success': todo.completed}">
                     <div class="row">
                         <div class="col-md-1">
                             <input type="checkbox" ng-model="todo.completed"
-                                   ng-change="toggleCompleted(todo)">
+                                   ng-change="todoCtrl.toggleCompleted(todo)">
                         </div>
                         <div class="col-md-10">
-                            <label ng-dblclick="editTodo(todo)" ng-hide="todo == editedTodo">
+                            <label ng-dblclick="todoCtrl.editTodo(todo)" ng-hide="todo == todoCtrl.editedTodo">
                                 {{todo.id}} - {{todo.msg}}
                             </label>
-                            <form ng-submit="saveEdits(todo)">
+                            <form ng-submit="todoCtrl.saveEdits(todo)">
                                 <input class="edit form-control" ng-trim="false" ng-model="todo.msg"
-                                       ng-blur="saveEdits(todo, 'blur')" ng-show="todo == editedTodo">
+                                       ng-blur="todoCtrl.saveEdits(todo, 'blur')" ng-show="todo == todoCtrl.editedTodo">
                             </form>
                         </div>
                         <div class="col-md-1">
 
-                            <span class="glyphicon glyphicon-remove pull-right" ng-click="removeTodo(todo)"></span>
+                            <span class="glyphicon glyphicon-remove pull-right" ng-click="todoCtrl.removeTodo(todo)"></span>
                         </div>
                 </li>
             </ul>

@@ -2,58 +2,58 @@
 
 app.controller('MainController', ['$rootScope', '$scope', '$routeParams', 'todoProvider', 'todoService', function ($rootScope, $scope, $routeParams, todoProvider, todoService) {
     var controller = this;
-    $scope.todos = [];
-    $scope.editedTodo = null;
+    controller.todos = [];
+    controller.editedTodo = null;
 
     todoService.awesomeFct();
 
     $scope.$on( 'todos.update', function( event ) {
-        $scope.todos = todoProvider.todos;
+        controller.todos = todoProvider.todos;
         console.log("event todos.update");
     });
 
     todoProvider.then(function (provider) {
         todoProvider = provider;
-        $scope.todos = todoProvider.todos;
+        controller.todos = todoProvider.todos;
     });
 
-    $scope.toggleCompleted = function(todo) {
+    controller.toggleCompleted = function(todo) {
         todoProvider.update(todo);
     };
 
-    $scope.removeTodo = function(todo) {
+    controller.removeTodo = function(todo) {
         console.log("remove", todo);
         todoProvider.remove(todo);
     };
 
-    $scope.editTodo = function(todo) {
+    controller.editTodo = function(todo) {
         console.log('edit todo', todo);
-        $scope.editedTodo = todo;
+        controller.editedTodo = todo;
     };
 
-    $scope.saveEdits = function(todo) {
+    controller.saveEdits = function(todo) {
         todoProvider.update(todo);
-        $scope.editedTodo = null;
+        controller.editedTodo = null;
     };
 
-    $scope.setFilter = function(option) {
+    controller.setFilter = function(option) {
         console.log(option);
         switch(option){
             case 'todo':
-                $scope.filterOptions = {completed: false};
+                controller.filterOptions = {completed: false};
                 break;
             case 'done':
-                $scope.filterOptions = {completed: true};
+                controller.filterOptions = {completed: true};
                 break;
             default:
             case 'all':
-                $scope.filterOptions = {};
+                controller.filterOptions = {};
                 break;
         }
-        $scope.activeOption = option;
+        controller.activeOption = option;
     };
 
-    $scope.setFilter($routeParams.status || 'all');
+    controller.setFilter($routeParams.status || 'all');
 
 }]);
 
