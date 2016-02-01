@@ -1,10 +1,9 @@
 'use strict';
 
-app.controller('MainController', ['$rootScope', '$scope', 'todoProvider', 'todoService', function ($rootScope, $scope, todoProvider, todoService) {
+app.controller('MainController', ['$rootScope', '$scope', '$routeParams', 'todoProvider', 'todoService', function ($rootScope, $scope, $routeParams, todoProvider, todoService) {
     var controller = this;
     $scope.todos = [];
     $scope.editedTodo = null;
-    $scope.activeOption = 'all';
 
     todoService.awesomeFct();
 
@@ -53,6 +52,8 @@ app.controller('MainController', ['$rootScope', '$scope', 'todoProvider', 'todoS
         }
         $scope.activeOption = option;
     };
+
+    $scope.setFilter($routeParams.status || 'all');
 
 }]);
 

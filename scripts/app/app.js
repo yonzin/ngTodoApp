@@ -11,10 +11,13 @@ var app = angular
             'ng'
         ])
         .config(function ($routeProvider) {
+            var routeConfig = {
+                templateUrl: 'scripts/app/views/main.html'
+            };
+
             $routeProvider
-                .when('/', {
-                    templateUrl: 'scripts/app/views/main.html'
-                })
+                .when('/', routeConfig)
+                .when('/:status', routeConfig)
                 .otherwise({
                     redirectTo: '/'
                 });
