@@ -4,8 +4,7 @@ var dependencies = [
     'ngRoute',
     'ng'
 ];
-var app = angular
-        .module('todoApp', [
+angular.module('todoApp', [
             'ngAnimate',
             'ngRoute',
             'ng'

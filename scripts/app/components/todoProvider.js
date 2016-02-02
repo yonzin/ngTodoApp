@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('todoService',  ['$rootScope', function ($rootScope) {
+angular.module('todoApp').service('todoService',  ['$rootScope', function ($rootScope) {
     var service = {
         awesomeFct: function() {
             //console.log($rootScope);
@@ -10,7 +10,7 @@ app.service('todoService',  ['$rootScope', function ($rootScope) {
     return service;
 }]);
 
-app.provider('todoProvider', [function () {
+angular.module('todoApp').provider('todoProvider', [function () {
         var provider =
         {
             rootScope: null,

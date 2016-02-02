@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MainController', ['$rootScope', '$scope', '$routeParams', 'todoProvider', 'todoService', function ($rootScope, $scope, $routeParams, todoProvider, todoService) {
+angular.module('todoApp').controller('MainController', ['$rootScope', '$scope', '$routeParams', 'todoProvider', 'todoService', function ($rootScope, $scope, $routeParams, todoProvider, todoService) {
     var controller = this;
     controller.todos = [];
     controller.editedTodo = null;
