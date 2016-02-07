@@ -1,0 +1,41 @@
+{
+  "name": "ngtodoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo app/app.js:build.js --dir app --host localhost --open --live --onupdate 'standard | notify-error' -- -t babelify -t [envify --NODE_ENV development] ",
+    "build": "browserify app/app.js -o dist/build.js -t babelify",
+    "postbuild": "uglifyjs dist/build.js -o dist/build.js && cp app/index.html dist && cp -R app/views dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonzin/ngTodoApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yonzin/ngTodoApp/issues"
+  },
+    "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "budo": "^8.0.2",
+    "envify": "^3.4.0",
+    "notify-error": "^1.2.0",
+    "standard": "^5.4.1",
+    "uglify": "^0.1.5"
+  },
+  "dependencies": {
+    "angular": "^v1.5.0-rc.2",
+    "angular-route": "^v1.5.0-rc.2",
+    "angular-sanitize": "^1.5.0",
+    "angular-translate": "^2.9.0",
+    "angular-ui-bootstrap": "^1.1.2",
+    "artoo-js": "^0.3.2",
+    "lodash": "^4.2.0"
+  },
+  "homepage": "https://github.com/yonzin/ngTodoApp#readme"
+}
